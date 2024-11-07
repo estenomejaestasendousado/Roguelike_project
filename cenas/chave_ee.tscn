@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://3t53xxabh5sa"]
+
+[ext_resource type="Script" path="res://cenas/chave_ee.gd" id="1_1e3nn"]
+[ext_resource type="Texture2D" uid="uid://b2mtdcqvav504" path="res://assets/Pixel Art Key Pack - Animated/Key 4/Key 4 - GREY - Spritesheet.png" id="1_jywig"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv1w7"]
+atlas = ExtResource("1_jywig")
+region = Rect2(0, 0, 14, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my2cm"]
+atlas = ExtResource("1_jywig")
+region = Rect2(14, 0, 14, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fl7l"]
+atlas = ExtResource("1_jywig")
+region = Rect2(28, 0, 14, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsf45"]
+atlas = ExtResource("1_jywig")
+region = Rect2(42, 0, 14, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jejc7"]
+atlas = ExtResource("1_jywig")
+region = Rect2(56, 0, 14, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dtprm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv1w7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my2cm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fl7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsf45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jejc7")
+}],
+"loop": true,
+"name": &"chave",
+"speed": 11.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccjao"]
+size = Vector2(13.8125, 28.6875)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_1e3nn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dtprm")
+animation = &"chave"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.09375, 0.28125)
+shape = SubResource("RectangleShape2D_ccjao")

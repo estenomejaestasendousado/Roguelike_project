@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccseqt0sprh8j"]
+
+[ext_resource type="Script" path="res://cenas/powerupp_vida.gd" id="1_3xujw"]
+[ext_resource type="Texture2D" uid="uid://2quvswoby5he" path="res://assets/powerupdevida.png" id="1_41ume"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jptj4"]
+
+[node name="Area2D" type="Area2D"]
+scale = Vector2(0.168063, 0.187983)
+script = ExtResource("1_3xujw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.115, 0.115)
+texture = ExtResource("1_41ume")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.375, 0.585)
+scale = Vector2(2.88, 2.88)
+shape = SubResource("RectangleShape2D_jptj4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

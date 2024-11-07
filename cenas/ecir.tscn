@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuky4iujicbmf"]
+
+[ext_resource type="Script" path="res://cenas/ecir.gd" id="1_42vyh"]
+[ext_resource type="Texture2D" uid="uid://6vi3syua40dg" path="res://assets/WhatsApp Image 2024-10-21 at 19.59.37 (1).jpeg" id="2_djh4e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nx6rk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wuhk"]
+
+[node name="ecir" type="CharacterBody2D"]
+script = ExtResource("1_42vyh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0239711, 0.0304165)
+texture = ExtResource("2_djh4e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.23677, 1.79325)
+shape = SubResource("RectangleShape2D_nx6rk")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 259
+collision_mask = 259
+
+[node name="hitbox" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.42242, 2.09252)
+shape = SubResource("RectangleShape2D_1wuhk")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

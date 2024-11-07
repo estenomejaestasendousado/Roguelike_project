@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbkxux8a2cfpt"]
+
+[ext_resource type="PackedScene" uid="uid://bi2bbfk00wimq" path="res://cenas/player.tscn" id="1_0eseg"]
+[ext_resource type="PackedScene" uid="uid://dvutrj32d3kka" path="res://cenas/inimigo.tscn" id="3_8hfjr"]
+[ext_resource type="PackedScene" uid="uid://dylcpf0bc0nw6" path="res://cenas/cenarios.tscn" id="3_p6wwp"]
+[ext_resource type="PackedScene" uid="uid://jhd0jwbdfspp" path="res://cenas/spawner.tscn" id="4_o3ob8"]
+
+[node name="FaseUm" type="Node2D"]
+
+[node name="Spawner" parent="." instance=ExtResource("4_o3ob8")]
+
+[node name="TileMap" parent="." instance=ExtResource("3_p6wwp")]
+
+[node name="Player" parent="." instance=ExtResource("1_0eseg")]
+scale = Vector2(1.5127, 1.4693)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2(2.6095e-05, 3.75418e-05)
+zoom = Vector2(1.5, 1.5)
+
+[node name="Enemy" parent="." instance=ExtResource("3_8hfjr")]
+collision_mask = 15
