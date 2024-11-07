@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqau5qa4ytv72"]
+
+[ext_resource type="Script" path="res://cenas/caixa_destrutivel.gd" id="1_i28ty"]
+[ext_resource type="Texture2D" uid="uid://h0hta4g5jowv" path="res://assets/Dungeon Tiles/Dungeon Tiles/Tiles/36.png" id="1_mvmdc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0jcsp"]
+
+[node name="caixa_destrutivel" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_i28ty")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mvmdc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.530331, -0.176777)
+scale = Vector2(1.0183, 1.12928)
+shape = SubResource("RectangleShape2D_0jcsp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
