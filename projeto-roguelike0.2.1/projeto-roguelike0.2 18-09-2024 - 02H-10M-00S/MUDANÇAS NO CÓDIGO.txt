@@ -1,0 +1,155 @@
+DATA = 17/19/2024 // 18/09/2024
+
+23:20 -> MUDANÇA DE MUNIÇÃO COLOCADA no player
+
+#tipos de bala
+#enum tipos_de_bala{ NORMAL,FOGO }
+#var tipo_de_municao_atual = tipos_de_bala.NORMAL
+
+	if Input.is_action_just_pressed("atirar"):
+		#_atirar()
+		#_atirar_variacao_fogo()
+	#if Input.is_action_just_pressed("mudar_tipo_de_bala"):
+		#if tipo_de_municao_atual == tipos_de_bala.NORMAL:
+			#tipo_de_municao_atual = tipos_de_bala.FOGO
+		#else:
+			#tipo_de_municao_atual = tipos_de_bala.NORMAL
+
+func _atirar():
+	#if tipo_de_municao_atual == tipos_de_bala.NORMAL:
+		#var bullet = preload("res://cenas/bullet.tscn")
+		var bullet_instance = bullet.instantiate()
+		bullet_instance.position = global_position
+		bullet_instance.rotation_degrees = rotation_degrees
+		get_tree().get_root().call_deferred("add_child", bullet_instance)
+
+func _atirar_variacao_fogo():
+	#if tipo_de_municao_atual == tipos_de_bala.FOGO:
+		#var bullet_fire = preload("res://cenas/bullet_fire_variation.tscn")
+		var bullet_fire_instance = bullet_fire.instantiate()
+		bullet_fire_instance.position = global_position
+		bullet_fire_instance.rotation_degrees = rotation_degrees
+		get_tree().get_root().call_deferred("add_child", bullet_fire_instance)
+
+
+00:25 -> SISTEMA DE DEBUFF COM UM TIMER - aplicado no inimigo, mas pode ser aplicado ao player
+
+if body.is_in_group("Bullet Fire"):
+		_ativar_debuff()
+		
+func _debuff_fogo():
+	if max_vida != 0:
+		max_vida -= debuff_fogo_dano
+		print(max_vida)
+		if max_vida <= 0:
+			queue_free()
+	else:
+		_desativar_debuff()
+
+func _ativar_debuff():
+	if !debuff_ativado:
+		debuff_ativado = true
+		tempode_debuff.start()
+
+func _desativar_debuff():
+	if debuff_ativado:
+		debuff_ativado = false
+		tempode_debuff.stop()	
+
+func _on_timer_timeout() -> void:
+	if debuff_ativado:
+		_debuff_fogo()
+
+
+00:37 -> "GAMBIARRA" PARA O DEBUFF NÃO SER PARA SEMPRE - aplicado ao inimigo mas pode ser aplicado no player
+
+
+var tempo_de_debuff = 0
+var tempo_maximo_de_debuff = 5
+
+
+func _on_timer_timeout() -> void:
+	if debuff_ativado:
+		_debuff_fogo()
+		tempo_de_debuff += 1
+		print(tempo_debuff.time_left)
+		if tempo_de_debuff >= tempo_maximo_de_debuff:
+			_desativar_debuff()
+			tempo_de_debuff = 0
+
+01:25 -> "MAIS UMA GABIARRA" PARA UM SISTEMA DE COOLDOWN - aplicado no player
+
+@onready var coldown_tempo = $CooldownTempo
+var em_coldown = 0
+var coldown_maximo = 5
+
+	if Input.is_action_just_pressed("atirar"):
+		_atirar()
+		if em_coldown <= 0: #aqui tem que ser assim, pq voce tem que atirar pelo menos uma vez
+			_atirar_variacao_fogo()
+			coldown_tempo.start() #aqui estora o tempo de 1 em 1 seg
+		em_coldown = coldown_maximo #aqui esta a espera do coldwns
+
+func _on_cooldown_tempo_timeout() -> void:
+	em_coldown -= 1 #aqui vai igualar até 0 e depois receber o 5 dnv
+	if em_coldown == 0:
+		print("pode atirar")
+
+01:39 -> "MAIS UMA GABIARRA" PARA UM SISTEMA DE COOLDOWN DE INVENCIBILIDADE - aplicado no player
+(mesma ideia do cooldown das balas)
+
+var max_life = 100
+var em_coldown_invencibilidade = 0
+var tempo_maximo_de_invencibilidade = 3
+@onready var tempo_invencibilidade = $Invencibilidade
+
+	if body.is_in_group("Inimigos"):
+		if em_coldown_invencibilidade <= 0:
+			print("levou dano")
+			max_life -= 50
+			if max_life <= 0:	
+				_die()
+		tempo_invencibilidade.start()
+		em_coldown_invencibilidade = tempo_maximo_de_invencibilidade
+
+func _on_invencibilidade_timeout_ivencibilidade() -> void:
+	em_coldown_invencibilidade -= 1
+	if em_coldown_invencibilidade == 0:
+		print("fim da invencibilidade")
+
+02:02 -> ARRUMADO BUG DE NÃO DIFERENCIAR BALAS E COOLDOWN - aplicado no player
+	
+	if Input.is_action_just_pressed("atirar"):
+		if tipo_de_municao_atual == tipos_de_bala.NORMAL:
+			_atirar()
+		if em_coldown <= 0 && tipo_de_municao_atual == tipos_de_bala.FOGO: #aqui tem que ser assim, pq voce tem que atirar pelo menos uma vez
+			_atirar_variacao_fogo()
+			em_coldown = coldown_maximo #aqui esta a espera do coldwns
+			coldown_tempo.start() #aqui estora o tempo de 1 em 1 seg
+
+	func _on_cooldown_tempo_timeout() -> void:
+		em_coldown -= 1 #aqui vai igualar até 0 e depois receber o 5 dnv
+		print("Não pode atirar")
+		if em_coldown == 0:
+			print("pode atirar")
+		c	oldown_tempo.stop()
+
+
+OBS: 	BASICAMENTE QUANDO VOCÊ ATIRAVA COM BALAS NORMAIS, O JOGO RECONHECIA O COOLDOWN 
+	E INVALIDAVA ATIRAR NORMAL E LOGO APOS ATIRAR COM FOGO, 
+	TINHA QUE PASSAR POR TODO O COOLDOWN
+
+COOLDOWN BUGADO ABAIXO:
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+	if Input.is_action_just_pressed("atirar"):
+		_atirar()
+		if em_coldown <= 0: #aqui tem que ser assim, pq voce tem que atirar pelo menos uma vez
+			_atirar_variacao_fogo()
+			coldown_tempo.start() #aqui estora o tempo de 1 em 1 seg
+		em_coldown = coldown_maximo #aqui esta a espera do coldwns
+
+	func _on_cooldown_tempo_timeout() -> void:
+		em_coldown -= 1 #aqui vai igualar até 0 e depois receber o 5 dnv
+		if em_coldown == 0:
+			print("pode atirar")
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''

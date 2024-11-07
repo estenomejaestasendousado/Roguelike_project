@@ -1,0 +1,7 @@
+porta e chave ja foram feitas
+continuar fase 2
+começar fase 3 e boss
+criar o vaso destrutivel com drops para a sala do boss
+começar a interface e pause
+seta indicando o final da fase
+condição para passar na primeira fasess

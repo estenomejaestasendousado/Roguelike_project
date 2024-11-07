@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://btnamjm4uf8jf"]
+
+[ext_resource type="Script" path="res://cenas/bullet_fire_variation.gd" id="1_klgoh"]
+[ext_resource type="Texture2D" uid="uid://dmv0po0e3y0b7" path="res://assets/pixil-frame-0.png" id="2_6x4mk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_he67d"]
+radius = 4.0
+height = 20.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ny4wl"]
+radius = 5.0
+
+[node name="RigidBody2D" type="RigidBody2D"]
+scale = Vector2(0.32, 0.399999)
+collision_layer = 8
+collision_mask = 5
+gravity_scale = 0.0
+script = ExtResource("1_klgoh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.995038, 0.413106, 0.257941, 1)
+self_modulate = Color(0.929381, 1, 0.682855, 1)
+position = Vector2(0, -1)
+scale = Vector2(1, 0.65625)
+texture = ExtResource("2_6x4mk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_he67d")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ny4wl")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

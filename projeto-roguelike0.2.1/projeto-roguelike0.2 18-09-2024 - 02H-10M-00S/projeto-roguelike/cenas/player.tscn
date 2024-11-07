@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://bi2bbfk00wimq"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_6ekxp"]
+[ext_resource type="Texture2D" uid="uid://bwis2rw7ewd0m" path="res://icon.svg" id="2_hjesv"]
+[ext_resource type="Texture2D" uid="uid://cc3cu0q0sxq3i" path="res://assets/luz.png" id="3_kt2n0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgxjt"]
+size = Vector2(15.748, 15.748)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0clg"]
+size = Vector2(23.2246, 22.8572)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcls4"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5rj6"]
+bg_color = Color(2.40654e-06, 0.720171, 0.33051, 1)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(201, 95)
+scale = Vector2(0.430579, 0.437499)
+collision_mask = 7
+script = ExtResource("1_6ekxp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_hjesv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.27, 1.27)
+shape = SubResource("RectangleShape2D_xgxjt")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(9.15527e-05, 0)
+shape = SubResource("RectangleShape2D_e0clg")
+
+[node name="CooldownTempo" type="Timer" parent="."]
+process_callback = 0
+
+[node name="Invencibilidade" type="Timer" parent="."]
+process_callback = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -14.0
+offset_top = -18.0
+offset_right = 14.0
+offset_bottom = -14.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fcls4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n5rj6")
+show_percentage = false
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 11.7
+shadow_enabled = true
+texture = ExtResource("3_kt2n0")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="CooldownTempo" to="." method="_on_cooldown_tempo_timeout"]
+[connection signal="timeout" from="Invencibilidade" to="." method="_on_invencibilidade_timeout_ivencibilidade"]

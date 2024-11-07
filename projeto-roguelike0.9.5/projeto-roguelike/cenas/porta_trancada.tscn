@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwwdmep0apjj5"]
+
+[ext_resource type="Script" path="res://cenas/porta_trancada.gd" id="1_0q5p3"]
+[ext_resource type="Texture2D" uid="uid://16g3tpgl6mix" path="res://assets/Dungeon Tiles/Dungeon Tiles/Full.png" id="2_pp0yu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q4m8e"]
+size = Vector2(79.7057, 37.9847)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5i3d"]
+atlas = ExtResource("2_pp0yu")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpsj0"]
+atlas = ExtResource("2_pp0yu")
+region = Rect2(192, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tx6u6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5i3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpsj0")
+}],
+"loop": false,
+"name": &"porta_abrindo",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m37wf"]
+size = Vector2(18.3334, 20)
+
+[node name="Area2D" type="StaticBody2D"]
+script = ExtResource("1_0q5p3")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.312976, 4.37505)
+scale = Vector2(0.626102, 1.10588)
+shape = SubResource("RectangleShape2D_q4m8e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_tx6u6")
+animation = &"porta_abrindo"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.235813, 0.794598)
+scale = Vector2(1.76978, 1.6035)
+shape = SubResource("RectangleShape2D_m37wf")

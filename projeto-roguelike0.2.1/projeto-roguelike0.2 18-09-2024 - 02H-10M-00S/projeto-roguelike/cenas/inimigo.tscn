@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvutrj32d3kka"]
+
+[ext_resource type="Script" path="res://cenas/inimigo.gd" id="1_4lxfy"]
+[ext_resource type="Texture2D" uid="uid://uktyop376wuq" path="res://assets/inimigo.png" id="1_giqkn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ps12x"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jo5xv"]
+bg_color = Color(1, 0.621042, 0.563658, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkwne"]
+size = Vector2(16, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kahji"]
+size = Vector2(17.7717, 18.9247)
+
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(1898, 1058)
+scale = Vector2(1.01422, 1.03831)
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_4lxfy")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -11.0
+offset_top = -14.0
+offset_right = 11.0
+offset_bottom = -12.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ps12x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jo5xv")
+max_value = 50.0
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.98023e-08, 2.38419e-07)
+scale = Vector2(0.65625, 0.640625)
+texture = ExtResource("1_giqkn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_nkwne")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 11
+
+[node name="hitbox" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.000244141, 0.556396)
+shape = SubResource("RectangleShape2D_kahji")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

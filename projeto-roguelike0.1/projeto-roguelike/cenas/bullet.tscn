@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddr6bltib0nay"]
+
+[ext_resource type="Script" path="res://cenas/bullet.gd" id="1_4gw8q"]
+[ext_resource type="Texture2D" uid="uid://dmv0po0e3y0b7" path="res://assets/pixil-frame-0.png" id="1_wuqan"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ecwh0"]
+radius = 2.0
+height = 20.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o347r"]
+radius = 5.0
+height = 22.0
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 12
+collision_mask = 5
+gravity_scale = 0.0
+script = ExtResource("1_4gw8q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ecwh0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.5)
+texture = ExtResource("1_wuqan")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_o347r")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo6hqevxwg8si"]
+
+[ext_resource type="Script" path="res://cenas/trap.gd" id="1_cv8p2"]
+[ext_resource type="Texture2D" uid="uid://cp4qajv0ulrv6" path="res://assets/Dungeon Tiles/Dungeon Tiles/Tiles/5.png" id="1_krjnp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ge05c"]
+size = Vector2(31.6394, 31.8499)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_cv8p2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.0339489, 0.0309725)
+shape = SubResource("RectangleShape2D_ge05c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.388163, 0.359729, 0.352893, 1)
+texture = ExtResource("1_krjnp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
