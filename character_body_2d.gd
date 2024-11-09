@@ -180,14 +180,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	
 	if body.is_in_group("Inimigos"):
 		if vida_escudo > 0:
-			vida_escudo -= 5
+			vida_escudo -= 10
 			escudobar.value = vida_escudo
 			if vida_escudo < 0:
 				vida_escudo = 0
 		else:	
 			if em_coldown_invencibilidade <= 0:
 				print("levou dano")
-				vida -= 10
+				vida -= 25
 				heathlbar.value = vida
 				print(vida)
 				if vida <= 0:
@@ -197,14 +197,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 	if body.is_in_group("mini_boss"):
 			if vida_escudo > 0:
-				vida_escudo -= 10
+				vida_escudo -= 15
 				escudobar.value = vida_escudo
 				if vida_escudo < 0:
 					vida_escudo = 0
 			else:	
 				if em_coldown_invencibilidade <= 0:
 					print("levou dano")
-					vida -= 25
+					vida -= 50
 					heathlbar.value = vida
 					print(vida)
 					if vida <= 0:
@@ -214,14 +214,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 	if body.is_in_group("Boss"):
 		if vida_escudo > 0:
-			vida_escudo -= 20
+			vida_escudo -= 25
 			escudobar.value = vida_escudo
 			if vida_escudo < 0:
 				vida_escudo = 0
 		else:	
 			if em_coldown_invencibilidade <= 0:
 				print("levou dano")
-				vida -= 50
+				vida -= 75
 				heathlbar.value = vida
 				print(vida)
 				if vida <= 0:
