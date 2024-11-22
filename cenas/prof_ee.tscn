@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpvt2x6gkfgc7"]
+
+[ext_resource type="Script" path="res://prof_ee.gd" id="1_ifpv3"]
+[ext_resource type="Texture2D" uid="uid://drjevgn1hrsn0" path="res://assets/luize-Photoroom.png" id="2_75hfy"]
+[ext_resource type="Texture2D" uid="uid://cijrviyf7p66m" path="res://assets/ito-Photoroom.png" id="3_pjem6"]
+[ext_resource type="Texture2D" uid="uid://bsuh363jqtufq" path="res://assets/rondas-Photoroom.png" id="4_ob5mg"]
+[ext_resource type="Texture2D" uid="uid://cobiqrxfonxg2" path="res://assets/rogers-Photoroom.png" id="5_mue3k"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ifpv3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 27)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_75hfy")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(28, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_pjem6")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-1, -29)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_ob5mg")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(-30, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_mue3k")

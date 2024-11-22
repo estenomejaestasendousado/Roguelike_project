@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dn71hffvwum0q"
+path="res://.godot/imported/boss song.mp3-28dba22cc90f213f39a4dda55ab1a93e.mp3str"
+
+[deps]
+
+source_file="res://assets/boss song.mp3"
+dest_files=["res://.godot/imported/boss song.mp3-28dba22cc90f213f39a4dda55ab1a93e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

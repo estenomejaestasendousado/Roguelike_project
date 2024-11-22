@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0i8pochc1r2f"]
+
+[ext_resource type="Script" path="res://area_2d.gd" id="1_gjtm1"]
+[ext_resource type="Texture2D" uid="uid://16g3tpgl6mix" path="res://assets/Dungeon Tiles/Dungeon Tiles/Full.png" id="2_s607x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nknn8"]
+atlas = ExtResource("2_s607x")
+region = Rect2(192, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqahy"]
+atlas = ExtResource("2_s607x")
+region = Rect2(192, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7csmf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nknn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqahy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nknn8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66kaf"]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_gjtm1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7csmf")
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.62109, 1.59641)
+shape = SubResource("RectangleShape2D_66kaf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
